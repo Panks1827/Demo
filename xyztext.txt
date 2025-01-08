@@ -1,0 +1,17 @@
+resource "aws_iam_user" "example" {
+  name = "Kevin"  # The name of the IAM user
+}
+
+resource "aws_iam_user_policy_attachment" "example_policy" {
+  user       = aws_iam_user.example.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+}
+
+
+# Upload an image (or any file) to the S3 bucket
+resource "aws_s3_bucket_object" "example_image" {
+  bucket = aws_s3_bucket.panku1827.bucket
+  key    = "images/Pankaj-1.png"  # The path where the image will be stored in >
+  source = "C:\\Users\\admin\\Desktop\\Pankaj-1.png"  # Replace with the local >
+  acl    = "private"  # You can set the ACL as needed
+}
